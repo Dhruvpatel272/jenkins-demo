@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Dhruvpatel272/jenkins-demo.git'
+                checkout scm
             }
         }
 
@@ -15,10 +15,15 @@ pipeline {
             }
         }
 
-        stage('Run App Script') {
+        stage('Build Docker Image') {
             steps {
-                sh 'chmod +x app.sh'
-                sh './app.sh'
+                sh 'docker build -t jenkins-demo:latest .'
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                sh 'docker run --rm jenkins-demo:latest'
             }
         }
     }
