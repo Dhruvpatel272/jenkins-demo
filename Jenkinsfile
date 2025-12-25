@@ -9,10 +9,15 @@ pipeline {
             }
         }
 
-        stage('Run Script') {
+        stage('Build Docker Image') {
             steps {
-                sh 'ls -la'
-                sh 'bash app.sh'
+                sh ''docker --verion'
+                sh ''docker build -t jenkins-demo:1.0 ."            
+            }
+        }
+        stage ('Run Docker container'){
+            steps{
+                sh 'docker run --rm jenkins-demo:1.0"
             }
         }
     }
