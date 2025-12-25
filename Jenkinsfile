@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh 'ls -la'
                 sh 'chmod +x app.sh'
-                sh './app.sh'
+                sh 'sh app.sh'
             }
         }
     }
