@@ -9,15 +9,16 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Check Docker') {
             steps {
-                sh ''docker --verion'
-                sh ''docker build -t jenkins-demo:1.0 ."            
+                sh 'docker --version'
             }
         }
-        stage ('Run Docker container'){
-            steps{
-                sh 'docker run --rm jenkins-demo:1.0"
+
+        stage('Run App Script') {
+            steps {
+                sh 'chmod +x app.sh'
+                sh './app.sh'
             }
         }
     }
