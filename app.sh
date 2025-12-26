@@ -1,2 +1,5 @@
-#!bin/bash
-echo "Hello from the Jenkins Ci pipeline"
+#!/bin/sh
+echo "App started successfully"
+while true; do
+  sleep 30
+done
