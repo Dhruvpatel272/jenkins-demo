@@ -15,12 +15,15 @@ pipeline {
         }
 
         stage('Run Docker Container') {
-            steps {
-                sh '''
-                docker rm -f jenkins-demo-container || true
-                docker run -d --name jenkins-demo-container jenkins-demo:latest
-                '''
+            sh '''
+            docker rm -f jenkins-demo-container || true
+            docker run -d \
+              --name jenkins-demo-container \
+              -p 5000:5000 \
+              jenkins-demo:latest
+                    '''
             }
+
         }
     }
 }
