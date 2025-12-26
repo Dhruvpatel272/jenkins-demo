@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -10,20 +11,22 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t jenkins-demo:latest .'
+                sh '''
+                  docker build -t jenkins-demo:latest .
+                '''
             }
         }
 
         stage('Run Docker Container') {
-            sh '''
-            docker rm -f jenkins-demo-container || true
-            docker run -d \
-              --name jenkins-demo-container \
-              -p 5000:5000 \
-              jenkins-demo:latest
-                    '''
+            steps {
+                sh '''
+                  docker rm -f jenkins-demo-container || true
+                  docker run -d \
+                    --name jenkins-demo-container \
+                    -p 5000:5000 \
+                    jenkins-demo:latest
+                '''
             }
-
         }
     }
 }
